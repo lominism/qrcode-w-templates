@@ -10,6 +10,7 @@ function App() {
   const [bgColor, setBgColor] = useState("#ffffff");
   const [fgColor, setFgColor] = useState("#000000");
   const [logo, setLogo] = useState(null);
+  const [logoSize, setLogoSize] = useState(0.2); // Default logo size as a fraction of QR code size
 
   // This updates the input word when the user clicks on the generate button
   function handleClick() {
@@ -92,6 +93,15 @@ function App() {
           />
           <h5>Upload Logo:</h5>
           <input type="file" accept="image/*" onChange={handleLogoUpload} />
+          <h5>Logo Size:</h5>
+          <input
+            type="range"
+            min="0.1"
+            max="0.5"
+            step="0.01"
+            value={logoSize}
+            onChange={(e) => setLogoSize(Number(e.target.value))}
+          />
         </div>
       </div>
       <div
@@ -119,8 +129,8 @@ function App() {
               top: "50%",
               left: "50%",
               transform: "translate(-50%, -50%)",
-              width: size * 0.2, // Adjust logo size relative to QR code
-              height: size * 0.2,
+              width: size * logoSize, // Adjust logo size relative to QR code
+              height: size * logoSize,
               borderRadius: "50%", // Optional: make the logo circular
             }}
           />
