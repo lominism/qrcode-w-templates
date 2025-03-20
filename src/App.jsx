@@ -3,7 +3,7 @@ import "./App.css";
 
 function App() {
   const [temp, setTemp] = useState("");
-  const [word, setWord] = useState("");
+  const [word, setWord] = useState("Example");
   const [size, setSize] = useState(250);
   const [bgColor, setBgColor] = useState("ffffff");
   const [qrCode, setQrCode] = useState("");
@@ -30,7 +30,7 @@ function App() {
             onChange={(e) => {
               setTemp(e.target.value);
             }}
-            placeholder="Enter text to encode"
+            placeholder="Enter URL to encode"
           />
           <button className="button" onClick={handleClick}>
             Generate
