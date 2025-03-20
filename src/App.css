@@ -2,9 +2,11 @@
 
 body {
   margin: 0;
-  height: 100vh;
+  min-height: 100vh; /* Allows the body to grow if content overflows */
+  width: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column; /* Ensures content stacks vertically */
+  justify-content: flex-start; /* Aligns content at the top */
   align-items: center;
 }
 .App{
@@ -14,10 +16,19 @@ body {
   align-items: center;
   gap: 50px;
   padding-top: 10px;
+  padding-bottom: 10px;
 }
 h1{
   font-family: Arial, sans-serif;
   font-size: 50px;
+  text-align: center;
+}
+.input-box {
+  display: flex;
+  flex-direction: column; /* Stack child elements vertically */
+  align-items: center; /* Center horizontally */
+  justify-content: center; /* Center vertically */
+  text-align: center; /* Optional: Center text inside */
 }
 .gen input{
   height: 35px;
@@ -44,11 +55,39 @@ button{
 button:active{
   box-shadow: none;
 }
-.extra{
+.extra {
   padding-top: 20px;
   display: flex;
   justify-content: space-around;
   gap: 10px;
+  flex-wrap: wrap; /* Allow items to wrap to the next line if needed */
+}
+@media (max-width: 500px) {
+  .extra {
+    flex-direction: column; /* Stack items vertically on smaller screens */
+    align-items: center; /* Center items horizontally */
+    gap: 20px; /* Add spacing between items */
+  }
+}
+.extra .color-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Adds spacing between elements */
+}
+.extra .size-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Adds spacing between elements */
+}
+.extra .upload-logo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Adds spacing between elements */
+}
+.extra .logo-size {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Adds spacing between elements */
 }
 .output-box{
   display: flex;

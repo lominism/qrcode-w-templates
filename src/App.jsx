@@ -50,58 +50,68 @@ function App() {
 
   return (
     <div className="App">
-      <h1>The Lombomb QR Code Generator</h1>
-      <div className="input-box">
-        <div className="gen">
-          <input
-            type="text"
-            onChange={(e) => {
-              setTemp(e.target.value);
-            }}
-            placeholder="Enter URL to encode"
-          />
-          <button className="button" onClick={handleClick}>
-            Generate
-          </button>
+      <div>
+        <h1>The Lombomb QR Code Generator</h1>
+        <div className="input-box">
+          <div className="gen">
+            <input
+              type="text"
+              onChange={(e) => {
+                setTemp(e.target.value);
+              }}
+              placeholder="Enter URL to encode"
+            />
+            <button className="button" onClick={handleClick}>
+              Generate
+            </button>
+          </div>
         </div>
         <div className="extra">
-          <h5>Background Color:</h5>
-          <input
-            type="color"
-            value={bgColor}
-            onChange={(e) => {
-              setBgColor(e.target.value);
-            }}
-          />
-          <h5>Foreground Color:</h5>
-          <input
-            type="color"
-            value={fgColor}
-            onChange={(e) => {
-              setFgColor(e.target.value);
-            }}
-          />
-          <h5>Dimension:</h5>
-          <input
-            type="range"
-            min="200"
-            max="600"
-            value={size}
-            onChange={(e) => {
-              setSize(Number(e.target.value));
-            }}
-          />
-          <h5>Upload Logo:</h5>
-          <input type="file" accept="image/*" onChange={handleLogoUpload} />
-          <h5>Logo Size:</h5>
-          <input
-            type="range"
-            min="0.1"
-            max="0.5"
-            step="0.01"
-            value={logoSize}
-            onChange={(e) => setLogoSize(Number(e.target.value))}
-          />
+          <div className="color-controls">
+            <h5>Background Color:</h5>
+            <input
+              type="color"
+              value={bgColor}
+              onChange={(e) => {
+                setBgColor(e.target.value);
+              }}
+            />
+            <h5>Foreground Color:</h5>
+            <input
+              type="color"
+              value={fgColor}
+              onChange={(e) => {
+                setFgColor(e.target.value);
+              }}
+            />
+          </div>
+          <div className="size-controls">
+            <h5>QR Code Size:</h5>
+            <input
+              type="range"
+              min="200"
+              max="600"
+              value={size}
+              onChange={(e) => {
+                setSize(Number(e.target.value));
+              }}
+            />
+          </div>
+          <div className="upload-logo">
+            <h5>Upload Logo:</h5>
+            <input type="file" accept="image/*" onChange={handleLogoUpload} />
+          </div>
+          <div className="logo-size">
+            <h5>Logo Size:</h5>
+            <input
+              type="range"
+              min="0.1"
+              max="0.5"
+              step="0.01"
+              value={logoSize}
+              onChange={(e) => setLogoSize(Number(e.target.value))}
+            />
+          </div>
         </div>
       </div>
       <div
