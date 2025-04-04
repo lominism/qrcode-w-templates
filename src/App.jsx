@@ -11,6 +11,7 @@ function App() {
   const [fgColor, setFgColor] = useState("#000000");
   const [logo, setLogo] = useState(null);
   const [logoSize, setLogoSize] = useState(0.2); // Default logo size as a fraction of QR code size
+  const [logoOpacity, setLogoOpacity] = useState(1); // Default logo opacity (fully visible)
 
   // This updates the input word when the user clicks on the generate button
   function handleClick() {
@@ -112,6 +113,17 @@ function App() {
               onChange={(e) => setLogoSize(Number(e.target.value))}
             />
           </div>
+          <div className="logo-opacity">
+            <h5>Logo Opacity:</h5>
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.01"
+              value={logoOpacity}
+              onChange={(e) => setLogoOpacity(Number(e.target.value))}
+            />
+          </div>
         </div>
       </div>
       <div
@@ -119,32 +131,65 @@ function App() {
         className="output-box"
         style={{
           position: "relative",
-          display: "inline-block",
-          width: size,
-          height: size,
+          display: "flex", // Use flexbox for vertical stacking
+          flexDirection: "column", // Stack children vertically
+          alignItems: "center", // Center children horizontally
+          textAlign: "center", // Center text
+          padding: "20px", // Optional: add padding around the QR code
+          border: "2px solid #000", // Optional: add a border around the container
+          borderRadius: "10px", // Optional: rounded corners
+          backgroundColor: fgColor, // Set background color to match fgColor
         }}
       >
-        <QRCodeCanvas
-          value={word}
-          size={size}
-          bgColor={bgColor}
-          fgColor={fgColor}
-        />
-        {logo && (
-          <img
-            src={logo}
-            alt="Logo"
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: size * logoSize, // Adjust logo size relative to QR code
-              height: size * logoSize,
-              borderRadius: "50%", // Optional: make the logo circular
-            }}
+        <div
+          style={{
+            position: "relative",
+            display: "inline-block",
+            width: size + 20, // Add padding for the border
+            height: size + 20,
+            backgroundColor: bgColor, // Background color for the QR code area
+            border: "4px solid #000", // Border around the QR code
+            borderRadius: "8px", // Optional: rounded corners for the QR code border
+            padding: "10px", // Space between the QR code and the border
+          }}
+        >
+          <QRCodeCanvas
+            value={word}
+            size={size}
+            bgColor={bgColor}
+            fgColor={fgColor}
           />
-        )}
+          {logo && (
+            <img
+              src={logo}
+              alt="Logo"
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                width: size * logoSize, // Adjust logo size relative to QR code
+                height: size * logoSize,
+                borderRadius: "50%", // Optional: make the logo circular
+                opacity: logoOpacity, // Adjust logo opacity dynamically
+              }}
+            />
+          )}
+        </div>
+        <p
+          style={{
+            marginTop: "1px", // Add spacing between the QR code and text
+            fontSize: "30px",
+            fontWeight: "bold",
+            color: "#333",
+            border: "2px solid #000", // Add a border around the text
+            borderRadius: "8px", // Optional: rounded corners for the border
+            padding: "5px 10px", // Add padding inside the border
+            backgroundColor: "#fff", // Optional: background color for contrast
+          }}
+        >
+          SCAN ME
+        </p>
       </div>
       <button type="button" onClick={handleDownload}>
         Download
